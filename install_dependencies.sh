@@ -1,7 +1,7 @@
 #!/bin/bash
 # Install framework
-echo "Install the latest version of NPM" && npm install -g npm &&
-echo "Install Cypress" && npm install cypress --save-dev &&
+echo "Install the latest version of NPM" && npm install -g npm
+echo "Install Cypress" && npm install cypress --save-dev
 # Install libraries
 echo "dotenv Install" && npm install dotenv --save  # working with env files
 #echo "pdf-parse installed successfully" && npm install pdf-parse # working with pdf files
