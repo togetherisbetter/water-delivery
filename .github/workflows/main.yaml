@@ -3,15 +3,26 @@ on: [push]
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
+      # --- Install OS-level dependencies ---
+      - name: Install git-lfs and other tools
+        run: |
+          sudo apt-get install -y git-lfs
+          git lfs install
+
+      # --- Run custom installer script ---
+      - name: Run custom dependency installer
+        run: |
+          sh install_dependencies.sh
+
+      # --- Run Cypress from the Docker container ---
       - name: Run Cypress via Docker
         run: |
           docker run \
             -v ${{ github.workspace }}:/e2e \
             -w /e2e \
             cypress/included:latest \
-            sudo apt-get install git-lfs \
-            sh install_dependencies.sh \
             cypress run
